@@ -6,8 +6,10 @@ public class Zad1Test {
         testZigZag(11, 5);
         testZigZag(3, 8);
         testZigZag(20, 7);
+        testScarf(0, 4);
         testScarf(20, 7);
         testScarf(15, 3);
+        testScarf(3, 8);
     }
 
     private static void testZigZag(int n, int l) {
