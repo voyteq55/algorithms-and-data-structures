@@ -1,6 +1,5 @@
 package Lista02.Zad1;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -14,11 +13,14 @@ public class Array2Iterator<T> implements Iterator<T> {
         this.array2 = array2;
         this.arrayIndex = 0;
         this.itemIndex = 0;
+        while (arrayIndex < array2.length && this.array2.getSubarrayLength(arrayIndex) == 0) {
+            arrayIndex++;
+        }
     }
 
     @Override
     public boolean hasNext() {
-        return arrayIndex < array2.length && itemIndex < array2.getSubarrayLength(arrayIndex);
+        return arrayIndex < array2.length;
     }
 
     @Override
@@ -28,6 +30,9 @@ public class Array2Iterator<T> implements Iterator<T> {
             if (itemIndex >= array2.getSubarrayLength(arrayIndex)) {
                 arrayIndex++;
                 itemIndex = 0;
+            }
+            while (arrayIndex < array2.length && this.array2.getSubarrayLength(arrayIndex) == 0) {
+                arrayIndex++;
             }
             return objectToReturn;
         }

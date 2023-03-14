@@ -11,8 +11,8 @@ public class Array2<T> implements Iterable<T> {
         this.length = subArraysLengths.length;
         bigArray = (T[][]) new Object[this.length][];
         for (int i = 0; i < subArraysLengths.length; i++) {
-            if (subArraysLengths[i] <= 0) {
-                throw new IllegalArgumentException("invalid array lengths");
+            if (subArraysLengths[i] < 0) {
+                throw new IllegalArgumentException("exception raised: invalid argument (" + subArraysLengths[i] + " is not a valid length)");
             }
             bigArray[i] = (T[]) new Object[subArraysLengths[i]];
         }
