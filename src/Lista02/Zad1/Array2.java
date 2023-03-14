@@ -33,12 +33,8 @@ public class Array2<T> implements Iterable<T> {
         }
     }
 
-    public int getSubarrayLength(int i) {
-        return bigArray[i].length;
-    }
-
     @Override
     public Iterator<T> iterator() {
-        return new Array2Iterator<>(this);
+        return new Array2Iterator<>(bigArray);
     }
 }

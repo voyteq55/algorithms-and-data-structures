@@ -20,7 +20,7 @@ public class Array2Test {
 
         arr1.set(new BigInteger("88"), 3, 0);
 
-        System.out.println("value at index (2, 1)");
+        System.out.println("value at index [2, 1] (should be 5):");
         System.out.println(arr1.get(2, 1));
 
         System.out.println("\ndisplaying all array elements (using iterator):");
