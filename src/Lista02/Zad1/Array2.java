@@ -1,5 +1,7 @@
 package Lista02.Zad1;
 
+import Lista02.Modyfikacja.Array2SkipIterator;
+
 import java.util.Iterator;
 
 public class Array2<T> implements Iterable<T> {
@@ -36,5 +38,9 @@ public class Array2<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Array2Iterator<>(bigArray);
+    }
+
+    public Iterator<T> iterator(int n) {
+        return new Array2SkipIterator<>(bigArray, n);
     }
 }
