@@ -207,4 +207,35 @@ public class OneWayLinkedListWithSentinel<E> implements IList<E> {
         builder.append(']');
         return builder.toString();
     }
+
+    public boolean isPalindrome() {
+        if (isEmpty()) {
+            return true;
+        }
+
+        OneWayLinkedListWithSentinel<E> tempList = new OneWayLinkedListWithSentinel<>();
+        Element currentElement = sentinel.getNext();
+        int size = size();
+        int halfSize = size / 2;
+        for (int i = 0; i < halfSize; i++) {
+            tempList.add(0, currentElement.getValue());
+            currentElement = currentElement.getNext();
+        }
+        if (size % 2 == 1) {
+            currentElement = currentElement.getNext();
+        }
+
+        for (int i = 0; i < halfSize; i++) {
+            E valueFromPrimaryList = currentElement.getValue();
+            E valueFromTempList = tempList.remove(0);
+            currentElement = currentElement.getNext();
+            if ((valueFromPrimaryList == null && valueFromTempList != null) || (valueFromPrimaryList != null && valueFromTempList == null)) {
+                return false;
+            }
+            if (valueFromPrimaryList != null && valueFromTempList != null && !valueFromPrimaryList.equals(valueFromTempList)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
