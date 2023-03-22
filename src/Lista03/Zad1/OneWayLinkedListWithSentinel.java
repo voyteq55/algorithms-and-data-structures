@@ -198,7 +198,10 @@ public class OneWayLinkedListWithSentinel<E> implements IList<E> {
         builder.append('[');
         Element currentElement = sentinel.getNext();
         while (currentElement != null) {
-            builder.append(currentElement).append(", ");
+            builder.append(currentElement);
+            if (currentElement.getNext() != null) {
+                builder.append(", ");
+            }
             currentElement = currentElement.getNext();
         }
         builder.append(']');
