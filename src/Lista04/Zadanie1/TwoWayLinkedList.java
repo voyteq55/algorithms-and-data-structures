@@ -1,7 +1,5 @@
 package Lista04.Zadanie1;
 
-import Lista03.Zad1.OneWayLinkedListWithSentinel;
-
 import java.util.Iterator;
 
 public class TwoWayLinkedList<E> implements IList<E> {
