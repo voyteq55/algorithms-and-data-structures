@@ -1,8 +1,5 @@
 package Lista04.Zadanie1;
 
-
-import java.math.BigInteger;
-
 public class TwoWayLinkedListTest {
     public static void main(String[] args) {
         TwoWayLinkedList<Integer> testList = new TwoWayLinkedList<>();
@@ -13,7 +10,7 @@ public class TwoWayLinkedListTest {
         System.out.println("isEmpty: " + testList.isEmpty());
 
         // this doesn't work
-        // testList.set(0, BigInteger.ONE);
+        // testList.set(0, 1);
         // System.out.println(testList.get(0));
         // testList.remove(0);
 
