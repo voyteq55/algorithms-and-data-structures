@@ -77,19 +77,30 @@ public class TwoWayLinkedList<E> implements IList<E> {
     private Element head;
     private Element tail;
 
+    private int _size;
+
     public TwoWayLinkedList() {}
 
     private Element getElement(int index) {
         if (index<0) {
             throw new IndexOutOfBoundsException("index cannot be negative (" + index + "}");
         }
-        Element currentElement = head;
-        while (currentElement != null && index > 0) {
-            currentElement = currentElement.getNext();
-            index--;
-        }
-        if (currentElement == null) {
+        if (index > _size ) {
             throw new IndexOutOfBoundsException("index cannot be greater than size of the list");
+        }
+        Element currentElement;
+        if (index < (1 + _size) / 2) {
+            currentElement = head;
+            while (currentElement != null && index > 0) {
+                currentElement = currentElement.getNext();
+                index--;
+            }
+        } else {
+            currentElement = tail;
+            while (currentElement != null && index < _size) {
+                currentElement = currentElement.getPrevious();
+                index++;
+            }
         }
         return currentElement;
     }
@@ -104,6 +115,7 @@ public class TwoWayLinkedList<E> implements IList<E> {
         }
         tail.insertAfter(elementToAdd);
         tail = elementToAdd;
+        _size++;
         return true;
     }
 
@@ -125,12 +137,14 @@ public class TwoWayLinkedList<E> implements IList<E> {
                 tail = elementToAdd;
             }
         }
+        _size++;
     }
 
     @Override
     public void clear() {
         head = null;
         tail = null;
+        _size = 0;
     }
 
     @Override
@@ -185,6 +199,7 @@ public class TwoWayLinkedList<E> implements IList<E> {
             tail = elementToRemove.getPrevious();
         }
         elementToRemove.remove();
+        _size--;
         return valueToReturn;
     }
 
@@ -204,18 +219,20 @@ public class TwoWayLinkedList<E> implements IList<E> {
             }
             currentElement = currentElement.getNext();
         }
+        _size--;
         return false;
     }
 
     @Override
     public int size() {
-        Element currentElement = head;
-        int counter = 0;
-        while (currentElement != null) {
-            currentElement = currentElement.getNext();
-            counter++;
-        }
-        return counter;
+//        Element currentElement = head;
+//        int counter = 0;
+//        while (currentElement != null) {
+//            currentElement = currentElement.getNext();
+//            counter++;
+//        }
+//        return counter;
+        return _size;
     }
 
 
