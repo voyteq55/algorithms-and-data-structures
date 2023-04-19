@@ -5,45 +5,61 @@ import Lista05.SortingTester.core.SortingAlgorithm;
 import java.util.*;
 
 public class LinkedListOptimizedQuickSort<T> extends SortingAlgorithm<T> {
-    PivotSelection pivotSelector;
+    PivotSelection<T> pivotSelector;
 
-    public LinkedListOptimizedQuickSort(Comparator<? super T> comparator, PivotSelection pivotSelection) {
+    public LinkedListOptimizedQuickSort(Comparator<? super T> comparator, PivotSelection<T> pivotSelection) {
         super(comparator);
         this.pivotSelector = pivotSelection;
     }
 
     @Override
     public List<T> sort(List<T> list) {
-        ArrayList<T> newList = new ArrayList<>(list);
-        quicksort(newList, 0, list.size());
+        List<T> newList = quicksort(list);
         list.clear();
         list.addAll(newList);
         return list;
     }
 
-    public void quicksort(List<T> list, int indexStart, int indexEnd) {
-        if (indexEnd - indexStart > 1) {
-            int indexPivot = partition(list, indexStart, indexEnd);
-            quicksort(list, indexStart, indexPivot);
-            quicksort(list, indexPivot + 1, indexEnd);
+    public List<T> quicksort(List<T> list) {
+        if (listHasAtMostOneElement(list)) {
+            return list;
         }
-    }
 
-    public int partition(List<T> list, int indexStart, int indexEnd) {
-        int pivotIndex = pivotSelector.select(indexStart, indexEnd);
-        T pivotValue = list.get(pivotIndex);
-        swap(list, indexStart, pivotIndex);
+        T pivotElement = pivotSelector.select(list);
 
-        int targetIndex = indexStart;
-        for (int passIndex = indexStart + 1; passIndex < indexEnd; passIndex++) {
-            if (compare(list.get(passIndex), pivotValue) <= 0) {
-                targetIndex++;
-                swap(list, passIndex, targetIndex);
+        List<T> smallerThanPivotList = new LinkedList<>();
+        List<T> largerThanPivotList = new LinkedList<>();
+
+        for (T element : list) {
+            if (element != pivotElement) {
+                if (compare(element, pivotElement) < 0) {
+                    smallerThanPivotList.add(element);
+                } else {
+                    largerThanPivotList.add(element);
+                }
             }
         }
 
-        swap(list, targetIndex, indexStart);
+        List<T> sortedSmallerThanPivotList = quicksort(smallerThanPivotList);
+        List<T> sortedLargerThanPivotList = quicksort(largerThanPivotList);
 
-        return targetIndex;
+        return mergeListsAndPivot(sortedSmallerThanPivotList, pivotElement, sortedLargerThanPivotList);
+    }
+
+    private List<T> mergeListsAndPivot(List<T> leftList, T pivot, List<T> rightList) {
+        List<T> mergedList = new LinkedList<>();
+        mergedList.addAll(leftList);
+        mergedList.add(pivot);
+        mergedList.addAll(rightList);
+        return mergedList;
+    }
+
+    private boolean listHasAtMostOneElement(List<T> list) {
+        if (list.isEmpty()) {
+            return true;
+        }
+        Iterator<T> iterator = list.iterator();
+        iterator.next();
+        return !iterator.hasNext();
     }
 }

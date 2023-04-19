@@ -6,9 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 
 public class QuickSort<T> extends SortingAlgorithm<T> {
-    PivotSelection pivotSelector;
+    PivotSelection<T> pivotSelector;
 
-    public QuickSort(Comparator<? super T> comparator, PivotSelection pivotSelection) {
+    public QuickSort(Comparator<? super T> comparator, PivotSelection<T> pivotSelection) {
         super(comparator);
         this.pivotSelector = pivotSelection;
     }
