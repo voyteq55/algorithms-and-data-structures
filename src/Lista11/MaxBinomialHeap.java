@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.NoSuchElementException;
 
 public class MaxBinomialHeap<T> {
-    // extractMin
     private Node _head;
     private Comparator<T> cmp;
 
@@ -33,7 +32,6 @@ public class MaxBinomialHeap<T> {
             this.degree++;
             return this;
         }
-
     }
 
     public MaxBinomialHeap(Comparator<T> cmp) {
@@ -128,9 +126,7 @@ public class MaxBinomialHeap<T> {
 
             nextTree = currentTree.nextSibling;
         }
-
     }
-
 
     public void insert(T element) {
         insertNode(new Node(element));
@@ -206,6 +202,5 @@ public class MaxBinomialHeap<T> {
         increaseKey(node, null);
         extractMaximum();
     }
-
 
 }

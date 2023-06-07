@@ -43,7 +43,5 @@ public class MaxBinomialHeapTest {
         System.out.println(testHeap.extractMaximum());
         System.out.println(testHeap.extractMaximum());
         System.out.println(testHeap.extractMaximum());
-
-
     }
 }
